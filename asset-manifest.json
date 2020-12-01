@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/laura-stanley-project-five/static/css/main.40e4593c.chunk.css",
+    "main.js": "/laura-stanley-project-five/static/js/main.ef93e9e7.chunk.js",
+    "main.js.map": "/laura-stanley-project-five/static/js/main.ef93e9e7.chunk.js.map",
+    "runtime-main.js": "/laura-stanley-project-five/static/js/runtime-main.1dcdb0ef.js",
+    "runtime-main.js.map": "/laura-stanley-project-five/static/js/runtime-main.1dcdb0ef.js.map",
+    "static/js/2.b24090ae.chunk.js": "/laura-stanley-project-five/static/js/2.b24090ae.chunk.js",
+    "static/js/2.b24090ae.chunk.js.map": "/laura-stanley-project-five/static/js/2.b24090ae.chunk.js.map",
+    "static/js/3.3b17772e.chunk.js": "/laura-stanley-project-five/static/js/3.3b17772e.chunk.js",
+    "static/js/3.3b17772e.chunk.js.map": "/laura-stanley-project-five/static/js/3.3b17772e.chunk.js.map",
+    "index.html": "/laura-stanley-project-five/index.html",
+    "static/css/main.40e4593c.chunk.css.map": "/laura-stanley-project-five/static/css/main.40e4593c.chunk.css.map",
+    "static/js/2.b24090ae.chunk.js.LICENSE.txt": "/laura-stanley-project-five/static/js/2.b24090ae.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/laura-stanley-project-five/static/media/pastel_background.f07706b2.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.1dcdb0ef.js",
+    "static/js/2.b24090ae.chunk.js",
+    "static/css/main.40e4593c.chunk.css",
+    "static/js/main.ef93e9e7.chunk.js"
+  ]
+}
