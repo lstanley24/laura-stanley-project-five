@@ -9,6 +9,8 @@ html { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: 
 .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; border: 0; padding: 0; white-space: nowrap; clip-path: inset(100%); clip: rect(0 0 0 0); overflow: hidden;}
 
 
+/* some general styles */
+
 * { 
   padding: 0;
   margin: 0;
@@ -31,8 +33,15 @@ a {
 p {
   font-family: 'Rubik', sans-serif;
   font-size: 30px;
-
 }
+
+.wrapper {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+ /* header styles  */
 
 header {
   background-image: url(./pastel_background.jpg);
@@ -47,9 +56,10 @@ h1 {
   margin: 0 auto;
   padding-top: 125px;
   text-align: center; 
+  font-style: italic;
 }
 
-.input-text-bar {
+.form-wrapper {
   display: flex;
   justify-content: center;
   margin-top: 50px;
@@ -64,7 +74,7 @@ fieldset {
 }
 
 label {
- font-family: 'Rubik', sans-serif;
+  font-family: 'Rubik', sans-serif;
   font-size: 30px;
 
 }
@@ -97,6 +107,7 @@ input[type="text"] {
   font-style: italic;
   opacity: 0.5;
 }
+
 .arrow {
   text-align: center;
   font-size: 50px;
@@ -108,16 +119,18 @@ input[type="submit"]:focus {
   background-color: #cadcdb;
 }
 
+/* styles for dynamically added list of books */
+
 .book-list-container {
   display: flex;
   justify-content: center;
+
 }
 
 .book-list-container-read {
-  display: flex;
-  justify-content: center;
   color: grey;
   font-style: italic;
+  text-decoration: line-through;
 }
 
 li {
@@ -125,23 +138,25 @@ li {
   font-size: 30px;
   border: #f3d4d4 2px solid;
   border-radius: 5px;
-  padding: 25px 150px 25px 150px;
+  width: 50%;
+  padding: 25px 0 25px 0;
   margin: 15px 0 15px 0;
 }
 
 input[type="checkbox"] {
-  margin-right: 150px;
+  margin: 0 100px 0 50px;
   width: 20px;
   height: 20px;
 }
 
-.checkbox
-
-
 .fa-recycle {
-  margin-left: 150px;
-  color: #acc4c4
+  color: #acc4c4;
+  font-size: 30px;
+  margin: 40px 0 0 25px;
+ 
 }
+
+/* styles for footer */
 
 footer {
   background-color: #cadcdb;
@@ -150,13 +165,66 @@ footer {
 
 }
 
+/* responsive styles */
+
+@media (max-width: 940px) {
+ .book-title {
+    font-size: 25px;
+  }
+
+  input[type="checkbox"] {
+    margin: 0 60px 0 30px;
+
+  }
+
+}
+
+@media (max-width: 768px) {
+
+/* List of books styles */
+
+  .form-wrapper {
+    max-width: 80%;
+    margin: 0 auto;
+    padding-top: 50px;
+
+  }
+
+  .book-title {
+    font-size: 20px;
+  }
+  
+  li {
+    width: 65%;
+  }
+
+}
+
 @media (max-width: 480px) {
+
+  /* Header styles */
+
   h1 {
     font-size: 50px;
   }
 
-  label {
+  .form-wrapper {
+    max-width: 60%;
+  
+  }
 
+  label {
+    font-size: 30px;
+  }
+  
+  /* List of books styles */
+  
+  li {
+    text-align: center;
+  }
+
+  input[type="checkbox"] {
+    margin: 0 20px 0 20px;
 
   }
 

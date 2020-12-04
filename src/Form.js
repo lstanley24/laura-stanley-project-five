@@ -3,7 +3,7 @@ import { Component } from "react";
 class Form extends Component {
     render () {
         return ( 
-            <div className= "input-text-bar">
+            <div className= "form-wrapper">
                 <form> 
                     <fieldset>
                         <label htmlFor="bookEntry">Enter the title of a book you want to read</label>
@@ -36,13 +36,5 @@ class Form extends Component {
     }
 
 }
-
-
-
-
-
-
-
-
 
 export default Form;
