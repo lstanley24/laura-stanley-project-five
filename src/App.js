@@ -152,7 +152,6 @@ class App extends Component  {
                                 }}
                                 id="book-read"
                                 aria-label="When book is finished, click to mark as complete"
-                                
                               >
                               </input> 
                               
