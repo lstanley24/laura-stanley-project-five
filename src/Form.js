@@ -1,6 +1,8 @@
 import { Component } from "react";
 
+
 class Form extends Component {
+ 
     render () {
         return ( 
             <div className= "form-wrapper">
@@ -15,7 +17,7 @@ class Form extends Component {
                                 onChange={this.props.userBook}
                                 value={this.props.bookInfo}
                             />
-
+                            
                         </div>
                         <div className="submit-button"> 
                             <input 
@@ -24,9 +26,11 @@ class Form extends Component {
                                 aria-required="True"
                                 value="Add Book"
                                 id="addBook"
-                                onClick={this.props.addBook}
+                                onClick= { this.props.addBook }
+                                
+                                
                             />
-
+                            
                         </div>
                     </fieldset>
                 </form>

@@ -32,7 +32,7 @@ a {
 
 p {
   font-family: 'Rubik', sans-serif;
-  font-size: 30px;
+  font-size: 3rem;
 }
 
 .wrapper {
@@ -47,7 +47,7 @@ header {
   background-image: url(./pastel_background.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 h1 {
@@ -75,7 +75,7 @@ fieldset {
 
 label {
   font-family: 'Rubik', sans-serif;
-  font-size: 30px;
+  font-size: 3rem;
 
 }
 
@@ -87,7 +87,7 @@ label {
 
 input[type="submit"] {
   font-family: 'Rubik', sans-serif;
-  font-size: 30px;
+  font-size: 3rem;
   background: white;
   padding: 15px;
   box-shadow: 5px 5px grey;
@@ -100,7 +100,7 @@ input[type="text"] {
   border: none;
   box-shadow: 5px 5px grey;
   font-family: 'Rubik', sans-serif;
-  font-size: 20px;
+  font-size: 2rem;
 }
 
 ::placeholder {
@@ -135,7 +135,7 @@ input[type="submit"]:focus {
 
 li {
   font-family: 'Rubik', sans-serif;
-  font-size: 30px;
+  font-size: 3rem;
   border: #f3d4d4 2px solid;
   border-radius: 5px;
   width: 50%;
@@ -144,16 +144,102 @@ li {
 }
 
 input[type="checkbox"] {
-  margin: 0 100px 0 50px;
-  width: 20px;
-  height: 20px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom:0;
+  opacity: 0;
+  z-index: 10;
+  cursor: pointer
+}
+
+.checkbox-container {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  margin: 0 25px;
+  display: inline-block;
+}
+
+.styled-checkbox {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom:0;
+  z-index: 5;
+
+}
+
+.book-title {
+  display:inline-block;
 }
 
 .fa-recycle {
   color: #acc4c4;
-  font-size: 30px;
+  font-size: 3rem;
   margin: 40px 0 0 25px;
- 
+  cursor: pointer;
+}
+
+.delete-warning {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0,0,0,0.5);
+
+}
+
+.pop-up {
+  background-color: white;
+  padding: 50px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pop-up p {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.pop-up-buttons {
+  margin: 20px 0;
+}
+
+.agree,
+.disagree {
+  font-size: 2rem;
+  background-color: grey;
+  color: white;
+  padding: 10px;
+  border: solid 2px grey;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.agree:hover,
+.agree:focus,
+.disagree:hover,
+.disagree:focus {
+  background-color: white;
+  color: grey;
+}
+
+.agree {
+  margin-right: 10px;
+
 }
 
 /* styles for footer */
@@ -162,20 +248,15 @@ footer {
   background-color: #cadcdb;
   text-align: center;
   padding: 25px 0 25px 0;
-
 }
 
 /* responsive styles */
 
 @media (max-width: 940px) {
  .book-title {
-    font-size: 25px;
+    font-size: 2.5rem;
   }
 
-  input[type="checkbox"] {
-    margin: 0 60px 0 30px;
-
-  }
 
 }
 
@@ -191,7 +272,7 @@ footer {
   }
 
   .book-title {
-    font-size: 20px;
+    font-size: 2rem;
   }
   
   li {
@@ -205,7 +286,7 @@ footer {
   /* Header styles */
 
   h1 {
-    font-size: 50px;
+    font-size: 4rem;
   }
 
   .form-wrapper {
@@ -214,17 +295,46 @@ footer {
   }
 
   label {
-    font-size: 30px;
+    font-size: 3rem;
   }
   
   /* List of books styles */
   
-  li {
-    text-align: center;
+  input[type="checkbox"] {
+    margin: 0 15px 0 15px;
+
   }
 
-  input[type="checkbox"] {
-    margin: 0 20px 0 20px;
+  .book-title {
+    text-align: center;
+    padding-top: 10px;
+  }
+
+  li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+  }
+
+
+  .pop-up {
+    padding: 30px;
+    margin: 20px;
+    text-align: center;
+
+  }
+
+  .agree,
+  .disagree {
+    margin: 10px 0;
+  }
+
+
+
+
+  footer p {
+    font-size: 1.5rem;
 
   }
 

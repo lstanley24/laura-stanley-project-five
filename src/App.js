@@ -2,6 +2,10 @@ import {Component} from "react";
 import firebase from "./firebase.js"
 import "./App.css";
 import Form from "./Form.js";
+import Delete from "./Delete.js";
+import bookIcon from "./book-icon.png";
+import Warning from "./Warning.js";
+import Dismiss from "./Dismiss.js"
 
 
 // Create two new components:
@@ -25,7 +29,8 @@ class App extends Component  {
     super ();
     this.state = {
       books: [],
-      userInput: ""
+      userInput: "",
+      deleteWarning: false
     }
   }
 
@@ -51,11 +56,13 @@ class App extends Component  {
         };
 
         bookEntries.push(formattedDataObj);
-      
+  
       }
+
       this.setState({
         // updating state with the user's info that's stored in firebase. 
         books: bookEntries
+
       })
     })
   } 
@@ -64,7 +71,7 @@ class App extends Component  {
   handleChange = (event) => {
     this.setState({
       userInput: event.target.value
-    })
+    }) 
 
   }
 
@@ -90,32 +97,68 @@ class App extends Component  {
       alert("Don't forget to enter a book title!")
     } else dbRef.push(book)
    
-    // this is supposed to reset the text field so that it's blank upon the form being submitted but it doesn't do it and I don't know why! Shh, don't tell. 
-    this.setState({
-      userInput: " "
-    }) 
+    this.clearUserInput();
+
   }
+
+  // this function ensures that the input=text field is cleared when the "add book" button is clicked. This function is called - this.ClearUserInput() - above. 
+
+  clearUserInput = () => {
+
+    document.getElementById('bookEntry').value='';
+
+    this.setState({
+      userInput: ""
+      
+    }) 
+
+  }
+
+  //these function ensures that the pop-up is not visible or visible 
+
+  popUpDisplayHide = () => {
+    this.setState ({
+      deleteWarning: false
+    })
+
+  }
+
+  popUpDisplayShow = () => {
+    this.setState ({
+      deleteWarning: true
+    })
+
+  }
+
 
   // this is a method for the checkbox which marks the book as read (rather than deleting each book entry)
   completedBook = (book) => {
     const dbRef = firebase.database().ref(book.id);
 
-      // once checked, in firebase, "read:false" is updated to "read:true"
-      dbRef.update({
-        name: book.name,
-        read:!book.read // If it's true it's going to convert to false, if it's false it's going to convert to true. Thanks to Ana for this logic! This allows the checkbox to be checked and unchecked and firebase updates the read value accordingly.  
-      })
+    // once checked, in firebase, "read:false" is updated to "read:true"
+    dbRef.update({
+      name: book.name,
+      read:!book.read // If it's true it's going to convert to false, if it's false it's going to convert to true. Thanks to Ana for this logic! This allows the checkbox to be checked and unchecked and firebase updates the read value accordingly.  
+    })
   }
 
   // this is a method for the recycling icon. Once the icon is clicked, the item is removed from the page + firebase 
   removeBook = (bookid) => {
+
     const dbRef = firebase.database().ref();
     dbRef.child(bookid).remove()
+
+    // this hides the pop-up window and ensures that the pop-up window doesn't appear again once a new book is entered. 
+    this.setState ({
+      deleteWarning: false
+    })
+    
   }
 
   render () {
     return (
       <div className="app">
+        
           <header> 
             <div className="wrapper"> 
               <h1>youreads</h1>
@@ -127,6 +170,7 @@ class App extends Component  {
                   addBook={this.handleClick}
                 />
 
+       
                 <div className="arrow">
                   <a href="#list-of-books" aria-label="Click to proceed to your list of books"><i className="fas fa-chevron-down"></i></a>
                 </div>
@@ -145,34 +189,60 @@ class App extends Component  {
 
                             {/* conditional to allow book list item be styled once marked (checked) as completed */}
                             <li className={(!book.read) ? "book-list":"book-list-container-read"}> 
-                      
-                              <input type="checkbox"
-                                onClick={() => {
-                                  this.completedBook(book)
-                                }}
-                                id="book-read"
-                                aria-label="When book is finished, click to mark as complete"
-                              >
-                              </input> 
-                              
+
+                              <div className="checkbox-container">
+                                    <div className={(!book.read) ? "far fa-square" : "fas fa-check-square"}/>
+                                <input type="checkbox"
+                                  onClick={() => {
+                                    this.completedBook(book)
+                                  }}
+                                  id="book-read"
+                                  aria-label="When book is finished, click to mark as complete"
+                                  title= {`When ${book.name} is finished, click to mark as complete`}
+                                />
+                              </div>
+                            
                               <span className="book-title"> {book.name} </span>
                             </li>
 
-                            <i className="fas fa-recycle"
-                              aria-label="Click to remove book"
-                              title="Click to remove book"
-                              onClick={() => { this.removeBook(book.id) }}>
-                            </i> 
+                            <Warning
+                              onClick={() => { this.popUpDisplayShow() }}
+                            />
+
+                            <div className="delete-warning" id="delete-warning" style={{display: this.state.deleteWarning ? "flex" : "none"}}> 
+                              <div className="pop-up">
+                                <p>Are you sure you want to delete this book from your list?</p>
+                                <figure>
+                                  <img src={bookIcon} alt={"a stack of books"}/>
+                                </figure>
+                        
+                                <div className="pop-up-buttons">
+                                
+                                  <Delete
+                                    onClick={() => { this.removeBook(book.id) }}
+                                  />
+
+                                  <Dismiss 
+                                    onClick={() => { this.popUpDisplayHide () }}
+                                    title={`click to return to book list`}
+                                  />
+
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         )
+
                       })
+
                     }
+        
                   </ul>
                 </div>
               </div>
             </section> 
         </main>
-        <footer><p>Created at Juno College</p></footer>
+        <footer><p>Created by Laura Stanley at Juno College</p></footer>
       </div>
     );
   }
