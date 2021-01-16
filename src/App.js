@@ -278,14 +278,14 @@ class App extends Component  {
         
                   </ul>
                 </div>
-                <Fragment>
+                {/* <Fragment>
                   <div className="goal-input">
                     <Counter
                       enterGoal={this.goalEntry} 
                       onClick={() => { this.addReadingGoal ()}}
                     />
                   </div>
-                </Fragment>
+                </Fragment> */}
               </div>
             </section> 
           </main>
