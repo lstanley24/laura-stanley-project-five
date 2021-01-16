@@ -1,7 +1,5 @@
 import { Component } from "react";
 
-
-
 class Delete extends Component {
 
   render() {

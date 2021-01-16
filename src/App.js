@@ -1,12 +1,14 @@
-import {Component} from "react";
+import {Component, Fragment} from "react";
 import firebase from "./firebase.js"
 import "./App.css";
 import Form from "./Form.js";
 import Delete from "./Delete.js";
 import bookIcon from "./book-icon.png";
 import Warning from "./Warning.js";
-import Dismiss from "./Dismiss.js"
+import Dismiss from "./Dismiss.js";
+import Counter from "./Counter.js"
 
+const bookKey = []
 
 // Create two new components:
   // text input bar + submit button {Form!}
@@ -28,9 +30,14 @@ class App extends Component  {
   constructor () {
     super ();
     this.state = {
+      // books: {
+      //   name:
+      //   popUp:false
+      // },
       books: [],
       userInput: "",
-      deleteWarning: false
+      deleteWarning: false,
+      readingGoal: 0
     }
   }
 
@@ -72,7 +79,6 @@ class App extends Component  {
     this.setState({
       userInput: event.target.value
     }) 
-
   }
 
   //handleClick method submits the data to firebase
@@ -104,7 +110,6 @@ class App extends Component  {
   // this function ensures that the input=text field is cleared when the "add book" button is clicked. This function is called - this.ClearUserInput() - above. 
 
   clearUserInput = () => {
-
     document.getElementById('bookEntry').value='';
 
     this.setState({
@@ -116,16 +121,43 @@ class App extends Component  {
 
   //these function ensures that the pop-up is not visible or visible 
 
-  popUpDisplayHide = () => {
+  popUpDisplayHide = (bookid) => {
+    bookKey.pop(bookid)
+
     this.setState ({
       deleteWarning: false
     })
+  }
+
+  
+  popUpDisplayShow = (bookid) => {
+
+    this.setState({
+      deleteWarning: true
+    })
+
+    // this pushes the unique bookid (generated from firebase) into an empty array called bookKey. Which you click on the 
+
+    bookKey.push(bookid)
+
+    console.log(bookKey)
+
 
   }
 
-  popUpDisplayShow = () => {
-    this.setState ({
-      deleteWarning: true
+  // this is a method for the delete button within the pop-up. Once the button is clicked, the item is removed from the page + firebase 
+
+  removeBook = (bookid) => {
+
+    const dbRef = firebase.database().ref();
+    dbRef.child(bookKey[0]).remove()
+
+    //this empties the array that the bookid is kept in so that if more books are added without the page refreshing etc., the app doesn't break
+    bookKey.pop(bookid)
+
+    // this hides the pop-up window and ensures that the pop-up window doesn't appear again once a new book is entered. 
+    this.setState({
+      deleteWarning: false
     })
 
   }
@@ -142,18 +174,21 @@ class App extends Component  {
     })
   }
 
-  // this is a method for the recycling icon. Once the icon is clicked, the item is removed from the page + firebase 
-  removeBook = (bookid) => {
 
-    const dbRef = firebase.database().ref();
-    dbRef.child(bookid).remove()
+  // this grabs the number (of books) the user enters in the reading goal field and stores it locally (in state)
 
-    // this hides the pop-up window and ensures that the pop-up window doesn't appear again once a new book is entered. 
-    this.setState ({
-      deleteWarning: false
-    })
-    
+  goalEntry = (event) => {
+    this.setState({
+      readingGoal: event.target.value
+    }) 
+
   }
+
+  goalSet = (event) => {
+    event.preventDefault();
+
+  }
+
 
   render () {
     return (
@@ -177,12 +212,15 @@ class App extends Component  {
             </div>  
           </header>
           <main>
-            <section>
+            <section className="user-data">
               <div className="wrapper">
                 {/* originally this list-of-books section was going to be its own component and yeah, it should be, for sure, but I ran out of time!   */}
                 <div className="list-of-books" id="list-of-books">
                   <ul> 
                     {
+                    // Object.keys(this.state.books).map((bookKey) => this.state.books[bookKey]);
+
+
                       this.state.books.map((book) => {
                         return (
                           <div className="book-list-container" key={book.id}>
@@ -206,7 +244,7 @@ class App extends Component  {
                             </li>
 
                             <Warning
-                              onClick={() => { this.popUpDisplayShow() }}
+                              onClick={() => { this.popUpDisplayShow(book.id) }}
                             />
 
                             <div className="delete-warning" id="delete-warning" style={{display: this.state.deleteWarning ? "flex" : "none"}}> 
@@ -219,7 +257,8 @@ class App extends Component  {
                                 <div className="pop-up-buttons">
                                 
                                   <Delete
-                                    onClick={() => { this.removeBook(book.id) }}
+                                    onClick={() => { this.removeBook(bookKey[0]) }}
+                                 
                                   />
 
                                   <Dismiss 
@@ -239,9 +278,17 @@ class App extends Component  {
         
                   </ul>
                 </div>
+                <Fragment>
+                  <div className="goal-input">
+                    <Counter
+                      enterGoal={this.goalEntry} 
+                      onClick={() => { this.addReadingGoal ()}}
+                    />
+                  </div>
+                </Fragment>
               </div>
             </section> 
-        </main>
+          </main>
         <footer><p>Created by Laura Stanley at Juno College</p></footer>
       </div>
     );

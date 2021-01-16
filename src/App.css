@@ -108,23 +108,33 @@ input[type="text"] {
   opacity: 0.5;
 }
 
+input[type="submit"]:hover,
+input[type="submit"]:focus {
+  background-color: #cadcdb;
+}
+
 .arrow {
   text-align: center;
   font-size: 50px;
   margin-top: 25px;
 }
 
-input[type="submit"]:hover,
-input[type="submit"]:focus {
-  background-color: #cadcdb;
-}
 
 /* styles for dynamically added list of books */
+
+.user-data {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.list-of-books {
+  max-width: 85%;
+}
 
 .book-list-container {
   display: flex;
   justify-content: center;
-
 }
 
 .book-list-container-read {
@@ -174,10 +184,6 @@ input[type="checkbox"] {
   bottom:0;
   z-index: 5;
 
-}
-
-.book-title {
-  display:inline-block;
 }
 
 .fa-recycle {
@@ -239,6 +245,11 @@ input[type="checkbox"] {
 
 .agree {
   margin-right: 10px;
+
+}
+
+.goal-input {
+  width: 10%;
 
 }
 
