@@ -127,10 +127,9 @@ input[type="submit"]:focus {
   justify-content: space-between;
 }
 
-
-.list-of-books {
+/* .list-of-books {
   max-width: 85%;
-}
+} */
 
 .book-list-container {
   display: flex;

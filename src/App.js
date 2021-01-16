@@ -10,22 +10,6 @@ import Counter from "./Counter.js"
 
 const bookKey = []
 
-// Create two new components:
-  // text input bar + submit button {Form!}
-  // to read-item section (list of books, checkmark, delete item button)
-
-// Configure firebase on React
-
-// In firebase, store the user's value from input bar using the handleChange method and push it into the database using the handleClick method. 
-
-// Grab data from Firebase using componentDidMount
-
-//Take these values (the to-read books) and put it in state -> an empty array that holds user's input
-
-// Map through the book state to display each book on page
-
-// When a user marks a book read (clicks on a to-read list item), state is updated so that the to-read list item is crossed-off (or greyed out).
-
 class App extends Component  {
   constructor () {
     super ();
